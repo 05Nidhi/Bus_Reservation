@@ -1,0 +1,30 @@
+<%= form_with model: @customer do |form| %>
+  <div>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :email %><br>
+    <%= form.email_field :email %><br>
+  </div>
+
+  <div>
+    <%= form.label :password %><br>
+    <%= form.password_field :password %><br>
+  </div>
+   <h3>Select your role</h3>
+  <div>
+    <%= form.radio_button :type,"Customer" %>
+    <%= form.label :Customer %>
+  </div>
+
+  <div>
+    <%= form.radio_button :type ,BusOwner%>
+    <%= form.label :BusOwner %>
+  </div>
+  <br>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

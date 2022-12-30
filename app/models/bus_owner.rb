@@ -1,0 +1,2 @@
+class BusOwner < Registration
+end
