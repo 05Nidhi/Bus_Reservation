@@ -5,15 +5,13 @@ class LoginsController < ApplicationController
     @user=Registration.new
   end
   def create
-    binding.break
     @user=Registration.find_by_email(params[:email])
-    if @user.name == params[:name] && @user.password == params[:password] && @user.type == params[:type]
-      binding.break
+    if @user.password == params[:password] && @user.type == params[:type]
       flash.now[:alert] = 'Login Sucessfull'
-      render "login/login"
+      render "logins/login"
     else
-      binding.break
       flash.now[:alert] = 'Please enter valid info'
     end
   end
+
 end

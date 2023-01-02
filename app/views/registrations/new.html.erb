@@ -1,17 +1,28 @@
-<%= form_with model: @customer do |form| %>
+<h2>Registration</h2>
+<%= form_with model: @customer, data: { turbo: false } do |form| %>
+
   <div>
-    <%= form.label :name %><br>
+    <%= form.label :name %>
     <%= form.text_field :name %>
+    <% @customer.errors.full_messages_for(:name).each do |message| %>
+      <div class="error"><%= message %></div>
+    <% end %>
   </div>
 
   <div>
-    <%= form.label :email %><br>
+    <%= form.label :email %>
     <%= form.email_field :email %><br>
+    <% @customer.errors.full_messages_for(:email).each do |message| %>
+      <div class="error"><%= message %></div>
+    <% end %>
   </div>
 
   <div>
-    <%= form.label :password %><br>
+    <%= form.label :password %>
     <%= form.password_field :password %><br>
+    <% @customer.errors.full_messages_for(:password).each do |message| %>
+      <div class="error"><%= message %></div>
+    <% end %>
   </div>
    <h3>Select your role</h3>
   <div>

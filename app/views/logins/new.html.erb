@@ -1,32 +1,16 @@
-<h3> Login </h3>
-<%= form_with model: @user do |form| %>
+<div>
+  <h2>login</h2>
+  <%= form_tag '/logins'do %>
   <div>
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :email %><br>
-    <%= form.email_field :email %><br>
-  </div>
-
-  <div>
-    <%= form.label :password %><br>
-    <%= form.password_field :password %><br>
-  </div>
-   <h3>Select your role</h3>
-  <div>
-    <%= form.radio_button :type,"Customer" %>
-    <%= form.label :Customer %>
-  </div>
-
-  <div>
-    <%= form.radio_button :type ,BusOwner%>
-    <%= form.label :BusOwner %>
-  </div>
-  <br>
-  <div>
-    <%= link_to "Login",  method: :create %>
+    email: <%= text_field_tag :email%><br>
 
   </div>
-<% end %>
+
+   password: <%= password_field_tag :password %> <br>
+
+   Enter your role(BusOwner/Customer) : <%= text_field_tag :type %><br>
+
+   <%= submit_tag "login" %>
+  <% end %>
+
+</div>
