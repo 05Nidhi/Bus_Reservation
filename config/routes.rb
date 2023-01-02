@@ -13,12 +13,14 @@ Rails.application.routes.draw do
   # post '/logins/login', to: 'logins#login'
   # post '/logins/new/create', to: 'logins#new#create'
   # post '/login/login', to: 'login#login'
-  resources :logins do
-    collection do
-      post :new
-      post :create
-    end
-  end
+  # resources :logins do
+  #   collection do
+  #     post :new
+  #     post :create
+  #   end
+  # end
+  resources :buses
+  post '/buses/new', to: 'buses#new'
 
 
 end

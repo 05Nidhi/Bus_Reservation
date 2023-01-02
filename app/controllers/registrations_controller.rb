@@ -6,7 +6,7 @@ class RegistrationsController < ApplicationController
   def create
     @customer=Registration.new(user_params)
     if @customer.save
-      render '/logins/new'
+      render 'logins/new'
     else
       render :new
     end
