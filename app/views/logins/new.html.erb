@@ -1,13 +1,5 @@
 <h2>login page</h2>
-<%= form_with model: @logins,url:logins_path, data: { turbo: false } do |form| %>
-
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-    <% @user.errors.full_messages_for(:name).each do |message| %>
-      <div class="error"><%= message %></div>
-    <% end %>
-  </div>
+<%= form_with model: @user,url:logins_path, data: { turbo: false } do |form| %>
 
   <div>
     <%= form.label :email %>

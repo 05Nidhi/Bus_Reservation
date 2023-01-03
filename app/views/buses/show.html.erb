@@ -1,1 +1,10 @@
-<%= image_tag @bus.bus_photo ,size: "150"%>
+<h3><%= @bus.name%></h3>
+
+<%= image_tag @bus.bus_photo ,size: "150" %>
+
+<h3> From: <%= @bus.source %> </h3>
+<h3> T0: <%= @bus.destination %> </h3>
+
+<h3> Available seats: <%= @bus.seats %>
+
+<h3> Bus Registration Number <%= @bus.bus_registration_number %> </h3>

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   # end
   resources :buses
   post '/buses/new', to: 'buses#new'
+  get '/buses/list', to: 'buses#list'
 
 
 end
