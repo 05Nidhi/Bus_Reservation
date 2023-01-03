@@ -2,9 +2,10 @@
 
 # This shiny device polishes bared foos
 class LoginsController < ApplicationController
-  # after_action :create
 
+  skip_before_action :expiration, except: :index
   def index
+    binding
     @bus = Bus.all
   end
 
@@ -15,10 +16,11 @@ class LoginsController < ApplicationController
   def create
     @user = Registration.find_by_email(params[:email])
     if @user.password == params[:password] && @user.type == params[:type]
+      @token = JwtWebToken.jwt_encode(@user.id)
       if params[:type] == 'BusOwner'
-        render '/buses/list'
+        redirect_to buses_path(token: @token)
       else
-        render '/logins/login'
+        render template: "products/show", locals: {token: @token}
       end
     else
       render :new

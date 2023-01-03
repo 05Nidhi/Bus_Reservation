@@ -1,5 +1,5 @@
 <h2>login page</h2>
-<%= form_with model: @user,url:logins_path, data: { turbo: false } do |form| %>
+<%= form_with model: @logins,url:logins_path, data: { turbo: false } do |form| %>
 
   <div>
     <%= form.label :email %>
@@ -16,6 +16,7 @@
       <div class="error"><%= message %></div>
     <% end %>
   </div>
+
    <h3>Select your role</h3>
   <div>
     <%= form.radio_button :type,"Customer" %>

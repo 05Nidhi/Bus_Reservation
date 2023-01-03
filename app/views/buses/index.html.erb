@@ -34,6 +34,8 @@ tr:nth-child(even) {
     <th>Available seats</th>
     <th>Bus photo</th>
   </tr>
+  <%= @token %>
+  <% binding.break%>
   <% @bus.each do |bus| %>
     <tr>
       <td>
