@@ -23,7 +23,8 @@ tr:nth-child(even) {
 <body>
 
 <h2>Bus list</h2>
-
+<%= button_to 'Create bus', buses_new_path(token:@token) %>
+<br>
 <table>
 
   <tr>
@@ -34,8 +35,6 @@ tr:nth-child(even) {
     <th>Available seats</th>
     <th>Bus photo</th>
   </tr>
-  <%= @token %>
-  <% binding.break%>
   <% @bus.each do |bus| %>
     <tr>
       <td>

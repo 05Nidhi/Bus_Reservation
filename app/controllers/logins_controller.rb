@@ -2,10 +2,8 @@
 
 # This shiny device polishes bared foos
 class LoginsController < ApplicationController
-
   skip_before_action :expiration, except: :index
   def index
-    binding
     @bus = Bus.all
   end
 
@@ -20,7 +18,7 @@ class LoginsController < ApplicationController
       if params[:type] == 'BusOwner'
         redirect_to buses_path(token: @token)
       else
-        render template: "products/show", locals: {token: @token}
+        redirect_to logins_path(token: @token)
       end
     else
       render :new

@@ -2,17 +2,16 @@
 
 # This shiny device polishes bared foos
 class RegistrationsController < ApplicationController
+  skip_before_action :expiration
   def new
     @customer = Registration.new
   end
 
   def create
     @customer = Registration.new(user_params)
-    if @customer.save
-      return redirect_to("/logins/new")
-    else
-      render :new
-    end
+    return redirect_to('/logins/new') if @customer.save
+
+    render :new
   end
 
   private

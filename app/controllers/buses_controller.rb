@@ -5,10 +5,9 @@ class BusesController < ApplicationController
   include JwtWebToken
 
   # before_action :expiration, only: %i[show update destroy create]
-  # before_action :expiration
+  # before_action :check_token
 
   def index
-    binding.break
     @bus = Bus.all
   end
 
@@ -17,11 +16,10 @@ class BusesController < ApplicationController
   end
 
   def create
-    binding.break
     @bus = Bus.new(user_params)
-    expiration(@bus.token)
     if @bus.save
-      render :show
+      redirect_to bus_path(@bus.id, token: @token)
+
     else
       render :new
     end
@@ -29,7 +27,6 @@ class BusesController < ApplicationController
 
   def show
     @bus = Bus.find(params[:id])
-    render 'buses/show'
   end
 
   private
@@ -38,12 +35,9 @@ class BusesController < ApplicationController
     params.require(:bus).permit(:name, :source, :destination, :seats, :bus_registration_number, :bus_photo)
   end
 
-  # def expiration(token)
-  #   binding.break
-  #   user_id = JwtWebToken.jwt_decode(token)['id']
-  #   @user = User.find(user_id)
-  #   # render json: {user:user,message:"Valid Token"}
-  # rescue JWT::ExpiredSignature
-  #   render json: { error: 'Token has expired' }
-  # end
+  def check_token
+    return unless @token.nil?
+
+    redirect_to logins_path
+  end
 end
