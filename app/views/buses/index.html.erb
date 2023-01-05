@@ -23,7 +23,11 @@ tr:nth-child(even) {
 <body>
 
 <h2>Bus list</h2>
-<%= button_to 'Create bus', buses_new_path(token:@token) %>
+<%if @current_user.type=="Customer" %>
+    <%= button_to 'Book your ticket' , tickets_new_path(token:@token)%>
+<% else %>
+    <%= button_to 'Create bus', buses_new_path(token:@token) %>
+<% end %>
 <br>
 <table>
 
@@ -52,7 +56,7 @@ tr:nth-child(even) {
         <%= bus.seats %>
       </td>
       <td>
-        <%= image_tag bus.bus_photo, size: "150" %>
+        <%= bus.bus_photo %>
       </td>
     </tr>
   <% end %>

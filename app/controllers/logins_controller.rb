@@ -3,9 +3,9 @@
 # This shiny device polishes bared foos
 class LoginsController < ApplicationController
   skip_before_action :expiration, except: :index
-  def index
-    @bus = Bus.all
-  end
+  # def index
+  #   @bus = Bus.all
+  # end
 
   def new
     @user = Registration.new
@@ -15,11 +15,7 @@ class LoginsController < ApplicationController
     @user = Registration.find_by_email(params[:email])
     if @user.password == params[:password] && @user.type == params[:type]
       @token = JwtWebToken.jwt_encode(@user.id)
-      if params[:type] == 'BusOwner'
-        redirect_to buses_path(token: @token)
-      else
-        redirect_to logins_path(token: @token)
-      end
+      redirect_to buses_path(token: @token)
     else
       render :new
     end

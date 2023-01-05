@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +23,12 @@ tr:nth-child(even) {
 <body>
 
 <h2>Bus list</h2>
-<%= button_to 'Book your ticket'%>
+<%binding.break %>
+<%if @current_user.type=="Customer" %>
+    <%= button_to 'Book your ticket' , tickets_path(token:@token)%>
+<% else %>
+    <%= button_to 'Create bus', buses_new_path(token:@token) %>
+<% end %>
 <br>
 <table>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_02_094437) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_05_115336) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -55,6 +55,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_02_094437) do
     t.string "password"
     t.string "password_digest"
     t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "seat_numbers", force: :cascade do |t|
+    t.integer "seat_no"
+    t.boolean "seat_status"
+    t.integer "bus_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bus_id"], name: "index_seat_numbers_on_bus_id"
+  end
+
+  create_table "tickets", force: :cascade do |t|
+    t.string "name"
+    t.string "ticket_source"
+    t.string "ticket_destination"
+    t.date "ticket_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

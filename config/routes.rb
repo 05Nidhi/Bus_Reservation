@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   resources :buses
   post '/buses/new', to: 'buses#new'
   get '/buses/list', to: 'buses#list'
-
+  post '/tickets/new' , to: 'tickets#new'
+  post '/tickets/create' , to:'tickets#create'
+  resources :tickets
 
 end

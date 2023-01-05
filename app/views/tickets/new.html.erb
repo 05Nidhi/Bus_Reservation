@@ -1,0 +1,30 @@
+<h2> Book your ticket now </h2>
+
+<%= form_with model: @ticket, url: tickets_create_path(token:@token) ,data: { turbo: false } do |form| %>
+
+    <%= form.label :name %> <%= form.text_field :name%>
+    <% @ticket.errors.full_messages_for(:name).each do |message| %>
+      <div class="error"><%= message %></div>
+    <% end %>
+
+    <%= form.label :source %> <%= form.text_field :ticket_source%>
+    <% @ticket.errors.full_messages_for(:ticket_source).each do |message| %>
+      <div class="error"><%= message %></div>
+    <% end %>
+
+    <%= form.label :destination %> <%= form.text_field :ticket_destination %>
+    <% @ticket.errors.full_messages_for(:ticket_destination).each do |message| %>
+      <div class="error"><%= message %></div>
+    <% end %>
+
+    <%= form.date_field :ticket_date%>
+    <% @ticket.errors.full_messages_for(:ticket_date).each do |message| %>
+      <div class="error"><%= message %></div>
+    <% end %>
+    <br>
+    <br>
+    <%= form.submit :Book_ticket %>
+
+
+
+<%end%>

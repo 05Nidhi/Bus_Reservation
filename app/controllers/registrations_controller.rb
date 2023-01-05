@@ -8,7 +8,7 @@ class RegistrationsController < ApplicationController
   end
 
   def create
-    @customer = Registration.new(user_params)
+    @customer = Registration.new(customer_params)
     return redirect_to('/logins/new') if @customer.save
 
     render :new
@@ -16,7 +16,7 @@ class RegistrationsController < ApplicationController
 
   private
 
-  def user_params
+  def customer_params
     params.require(:registration).permit(:name, :email, :password, :type)
   end
 

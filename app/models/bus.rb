@@ -5,6 +5,7 @@ class Bus < ApplicationRecord
   has_one_attached :bus_photo
   validate :avatar_size_validation
   validate :image_type
+  has_many :seat_numbers
 
   private
 

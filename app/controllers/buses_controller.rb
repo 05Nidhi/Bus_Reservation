@@ -16,7 +16,7 @@ class BusesController < ApplicationController
   end
 
   def create
-    @bus = Bus.new(user_params)
+    @bus = Bus.new(bus_params)
     if @bus.save
       redirect_to bus_path(@bus.id, token: @token)
 
@@ -31,13 +31,7 @@ class BusesController < ApplicationController
 
   private
 
-  def user_params
+  def bus_params
     params.require(:bus).permit(:name, :source, :destination, :seats, :bus_registration_number, :bus_photo)
-  end
-
-  def check_token
-    return unless @token.nil?
-
-    redirect_to logins_path
   end
 end
