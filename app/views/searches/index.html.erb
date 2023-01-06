@@ -22,7 +22,7 @@ tr:nth-child(even) {
 </head>
 <body>
 
-<%= form_tag buses_path, method: :get do %>
+<%= form_tag searches_path, method: :get do %>
   <%= hidden_field_tag 'token', @token  %>
   source: <%= text_field_tag :source, @source %>
   destination: <%= text_field_tag :destination, @destination %>
@@ -99,6 +99,7 @@ tr:nth-child(even) {
         <%= bus.bus_photo %>
       </td>
       <td>
+        <% @id=bus.id %>
         <%= button_to 'Book', tickets_new_path(token:@token, bus_id:bus.id) %>
       </td>
     </tr>

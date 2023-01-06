@@ -4,7 +4,16 @@
 
 <h3> From: <%= @bus.source %> </h3>
 <h3> T0: <%= @bus.destination %> </h3>
-
-<h3> Available seats: <%= @bus.seats %>
+<%= form_with do |form| %>
+  <h3>No of seats:
+  <%for i in @bus.seat_numbers %>
+  <br>
+    <div class="disabled">
+      <%= i.seat_no %>
+      <%= form.check_box disabled: true%>
+      </div>
+  <% end %>
+<% end %>
+  </h3>
 
 <h3> Bus Registration Number <%= @bus.bus_registration_number %> </h3>

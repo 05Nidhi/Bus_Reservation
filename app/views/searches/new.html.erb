@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,15 +20,6 @@ tr:nth-child(even) {
 </style>
 </head>
 <body>
-
-<h2>Bus list</h2>
-<%binding.break %>
-<%if @current_user.type=="Customer" %>
-    <%= button_to 'Book your ticket' , tickets_path(token:@token)%>
-<% else %>
-    <%= button_to 'Create bus', buses_new_path(token:@token) %>
-<% end %>
-<br>
 <table>
 
   <tr>
@@ -40,6 +30,8 @@ tr:nth-child(even) {
     <th>Available seats</th>
     <th>Bus photo</th>
   </tr>
+  <%binding.break%>
+  <% @source %>
   <% @bus.each do |bus| %>
     <tr>
       <td>
@@ -54,14 +46,18 @@ tr:nth-child(even) {
         <%= bus.bus_registration_number %>
       </td>
       <td>
-        <%= bus.seats %>
+        <%= bus.seat_numbers.where(seat_status:false).count %>
       </td>
       <td>
-        <%= image_tag bus.bus_photo, size: "150" %>
+        <%= bus.bus_photo %>
+      </td>
+      <td>
+        <%= button_to 'Book', tickets_new_path(token:@token) %>
       </td>
     </tr>
   <% end %>
 </table>
+<% end %>
+
 </body>
 </html>
-

@@ -8,7 +8,15 @@ class BusesController < ApplicationController
   # before_action :check_token
 
   def index
-    @bus = Bus.all
+    @source = params[:source]
+    @destination = params[:destination]
+    a=Bus.where(source:@source,destination:@destination)
+    binding.break
+    if a.count==0
+      @bus=Bus.all
+    else
+      @bus=a
+    end
   end
 
   def new
@@ -18,8 +26,10 @@ class BusesController < ApplicationController
   def create
     @bus = Bus.new(bus_params)
     if @bus.save
+      for i in 1..5
+        @bus.seat_numbers.create(seat_no:i,seat_status:false)
+      end
       redirect_to bus_path(@bus.id, token: @token)
-
     else
       render :new
     end
@@ -32,6 +42,6 @@ class BusesController < ApplicationController
   private
 
   def bus_params
-    params.require(:bus).permit(:name, :source, :destination, :seats, :bus_registration_number, :bus_photo)
+    params.require(:bus).permit(:name, :source, :destination, :bus_registration_number, :bus_photo)
   end
 end
