@@ -13,13 +13,9 @@ class SearchesController < ApplicationController
     @search = Ticket.new
   end
   def create
-    # for i in @bus
-    #   if @bus.source==params[:source]
-    search_params
     @source=params[:source]
-    binding.break
     @destination=params[:destination]
-    redirect_to searches_path(token:@token,source:@source,destination: @destination)
+    redirect_to searches_path(token:@token,source:@source,destination: @destination,flag:true)
 
   end
 

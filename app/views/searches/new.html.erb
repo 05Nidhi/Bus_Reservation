@@ -20,6 +20,7 @@ tr:nth-child(even) {
 </style>
 </head>
 <body>
+
 <table>
 
   <tr>
@@ -52,7 +53,7 @@ tr:nth-child(even) {
         <%= bus.bus_photo %>
       </td>
       <td>
-        <%= button_to 'Book', tickets_new_path(token:@token) %>
+        <%= button_to 'Book', tickets_new_path(token:@token,source:bus.source,destination:bus.destination) %>
       </td>
     </tr>
   <% end %>

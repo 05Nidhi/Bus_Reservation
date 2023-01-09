@@ -18,25 +18,36 @@ td, th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
+h3 {
+    text-align: right;
+}
 </style>
 </head>
 <body>
 
-<%= form_tag searches_path, method: :get do %>
+  <h3>
+    <%= button_to 'log out' , logins_new_path( flag: false) %>
+  </h3>
+
+<%= form_tag searches_path(flag:true), method: :get do %>
   <%= hidden_field_tag 'token', @token  %>
   source: <%= text_field_tag :source, @source %>
   destination: <%= text_field_tag :destination, @destination %>
-  <%= submit_tag 'Search' %>
+  <%= submit_tag 'Search' , :id => "submit" %>
+<% end %>
+<%= form_tag searches_path(flag:true), method: :get do %>
+    <%= hidden_field_tag 'token', @token  %>
+    <%= submit_tag 'clear' , :source => " " , :destination => " " %>
 <% end %>
 
 
 
 <h2>Bus list</h2>
 <%if @current_user.type=="BusOwner" %>
-    <%= button_to 'Create bus', buses_new_path(token:@token) %>
+    <%= button_to 'Create bus', buses_new_path(token:@token,flag:true) %>
     <br>
 <table>
-  <%= source %>
+
   <tr>
     <th>Name</th>
     <th>Source</th>
@@ -62,7 +73,7 @@ tr:nth-child(even) {
         <%= bus.seat_numbers.where(seat_status:false).count %>
       </td>
       <td>
-        <%= bus.bus_photo %>
+        <%= image_tag bus.bus_photo , style: 'max-width: 7rem;' %>
       </td>
     </tr>
   <% end %>
@@ -78,6 +89,7 @@ tr:nth-child(even) {
     <th>Bus registration number</th>
     <th>Available seats</th>
     <th>Bus photo</th>
+    <th>Book ticket</th>
   </tr>
   <% @bus.each do |bus| %>
     <tr>
@@ -96,7 +108,7 @@ tr:nth-child(even) {
         <%= bus.seat_numbers.where(seat_status:false).count %>
       </td>
       <td>
-        <%= bus.bus_photo %>
+        <%= image_tag bus.bus_photo , style: 'max-width: 7rem;' %>
       </td>
       <td>
         <% @id=bus.id %>

@@ -1,44 +1,30 @@
 class TicketsController < ApplicationController
 
+  def index
+  end
+
   def new
     @bus=Bus.find_by_id(params[:bus_id])
-    # @ticket=Ticket.new
-    # @seat_numbers = @bus.seat_numbers
-    # @seat_number = @bus.seat_numbers.new
-    # @source = params[:source]
-    # @name = params[:name]
-    # @destination = params[:destination]
   end
 
   def create
-
-    binding.break
     @bus=Bus.find_by_id(params[:bus_id])
+    if params[:seat_no].nil?
+      flash.alert = "seat can't be nil!!"
+      render :new
+    end
     a=params[:seat_no]
-    for i in @bus.seat_numbers
-      binding.break
-      if i.seat_no include a
-        @bus.seat_numbers.update(seat_status:true)
-      end
+    a=a.split(/,/)
+    b=Ticket.where(ticket_date: params[:ticket_date]) and Ticket.where(ticket_seat_no: params[:seat_no])
+
+    if b.count == 0
+      Ticket.create(name:params[:name],ticket_source:params[:source],ticket_destination:params[:destination],ticket_date:params[:ticket_date],ticket_seat_no:params[:seat_no])
+      @bus.seat_numbers.where(seat_no:a).update(seat_status:true)
+      redirect_to tickets_path(token: @token , bus_id: @bus.id , flag: true)
+    else
+      flash.alert = "Ticket of that date and that seat was already taken"
+      redirect_to tickets_new_path(token: @token , bus_id: @bus.id , flag: true)
+
     end
-
-
-    # binding.break
-    # a=Bus.where(source:@ticket.ticket_source,destination:@ticket.ticket_destination,name:@ticket.name).first
-    # @seats=a.seat_numbers
-    # redirect_to ticket_path(token:@token,ticket:@ticket,seats:@seats)
-
-
-    # if @ticket.save
-    #   redirect_to logins_new_path(token:@token)
-    # else
-    #   render :new
-    # end
   end
-
-  private
-
-    def ticket_params
-      # params.require(:ticket).permit(status:[])
-    end
 end

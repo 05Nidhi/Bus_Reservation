@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get '/buses/list', to: 'buses#list'
   post '/tickets/new' , to: 'tickets#new'
   post '/tickets/create' , to:'tickets#create'
+  get '/searches/show' , to: 'searches#show'
   post '/searches/new' , to:'searches#new'
   post '/searches/create' , to: 'searches#create'
   resources :searches

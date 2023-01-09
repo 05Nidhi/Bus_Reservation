@@ -1,24 +1,44 @@
-<h2>Select and book your ticket of your choice </h2>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  h3 {
+    text-align: right;
+}
+</style>
+</head>
+<body>
 
-<h2> Bus Name <%= @bus.name %></h2>
-<h3>FROM  <%= @bus.source %>    TO   <%= @bus.destination %> </h3>
+  <h3>
+    <%= button_to 'log out' , logins_new_path( flag:false) %>
+  </h3>
+  <h2>Select and book your ticket of your choice </h2>
 
-<% @bus.seat_numbers.each do |seat| %>
-  <div>
-    <% if seat.seat_status == false %>
-      seat: <%= seat.seat_no %>
-    <%end%>
-  </div>
-<% end %>
 
-<%= form_with model: @seat_number, url: tickets_create_path(token:@token,bus_id:@bus.id) ,data: { turbo: false } do |form| %>
-  Seat No: <%= form.text_field :seat_no %>
-  <% form.submit %>
-<%end%>
+  <h2> Bus Name <%= @bus.name %></h2>
+  <h2>FROM  <%= @bus.source %>    TO   <%= @bus.destination %> </h2>
 
-<%= form_tag tickets_create_path, method: :post do %>
-  <%= hidden_field_tag 'token', @token  %>
-  <%= hidden_field_tag 'bus_id', @bus.id  %>
-  Seat No: <%= text_field_tag :seat_no%>
-  <%= submit_tag 'Search' %>
-<% end %>
+  <% @bus.seat_numbers.each do |seat| %>
+    <div>
+      <% if seat.seat_status == false %>
+        seat: <%= seat.seat_no %>
+      <%end%>
+    </div>
+  <% end %>
+
+  <%= form_tag tickets_create_path( flag:true,source:@bus.source,destination:@bus.destination,name:@bus.name), method: :post do %>
+    <%= hidden_field_tag 'token', @token  %>
+    <%= hidden_field_tag 'bus_id', @bus.id  %>
+    Date: <%= date_field_tag :ticket_date%>
+    Seat No: <%= text_field_tag :seat_no%>
+
+    <%= submit_tag 'Book' %>
+    <% flash.each do |type, msg| %>
+      <div>
+        <%= msg %>
+      </div>
+    <% end %>
+  <% end %>
+
+</body>
+</html>

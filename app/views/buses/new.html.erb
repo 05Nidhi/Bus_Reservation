@@ -1,56 +1,78 @@
-<h2>Create bus route</h2>
-<%= form_with model: @bus,url: buses_path(token: @token), data: { turbo: false } do |form| %>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  h3 {
+    text-align: right;
+}
+</style>
+</head>
+<body>
 
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-    <% @bus.errors.full_messages_for(:name).each do |message| %>
-      <div class="error"><%= message %></div>
-    <% end %>
-  </div>
+  <h3>
+    <%= button_to 'log out' , logins_new_path(flag: false) %>
+  </h3>
 
-  <div>
-    <%= form.label :source %>
-    <%= form.text_field :source %><br>
-    <% @bus.errors.full_messages_for(:source).each do |message| %>
-      <div class="error"><%= message %></div>
-    <% end %>
-  </div>
+  <h2>Create bus route</h2>
+  <%= form_with model: @bus,url: buses_path(token: @token,flag:true), data: { turbo: false } do |form| %>
 
-  <div>
-    <%= form.label :destination %>
-    <%= form.text_field :destination %><br>
-    <% @bus.errors.full_messages_for(:destination).each do |message| %>
-      <div class="error"><%= message %></div>
-    <% end %>
-  </div>
-
-  <div>
-    <%= form.label :seats %>
-    <%= form.text_field :seats %><br>
-    <% @bus.errors.full_messages_for(:seats).each do |message| %>
-      <div class="error"><%= message %></div>
-    <% end %>
-  </div>
-
-  <div>
-    <%= form.label :bus_registration_number %>
-    <%= form.text_field :bus_registration_number %><br>
-    <% @bus.errors.full_messages_for(:bus_registration_number).each do |message| %>
-      <div class="error"><%= message %></div>
-    <% end %>
-  </div>
-
-  <div>
     <div>
-    <%= form.label :bus_photo%>
-    <%= form.file_field :bus_photo %><br>
-    <% @bus.errors.full_messages_for(:bus_photo).each do |message| %>
-      <div class="error"><%= message %></div>
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+      <% @bus.errors.full_messages_for(:name).each do |message| %>
+        <div class="error"><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :source %>
+      <%= form.text_field :source %><br>
+      <% @bus.errors.full_messages_for(:source).each do |message| %>
+        <div class="error"><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :destination %>
+      <%= form.text_field :destination %><br>
+      <% @bus.errors.full_messages_for(:destination).each do |message| %>
+        <div class="error"><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :no_of_seats %>
+      <%= form.text_field :no_of_seats %><br>
+      <% @bus.errors.full_messages_for(:no_of_seats).each do |message| %>
+        <div class="error"><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :bus_registration_number %>
+      <%= form.text_field :bus_registration_number %><br>
+      <% @bus.errors.full_messages_for(:bus_registration_number).each do |message| %>
+        <div class="error"><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <div>
+      <%= form.label :bus_photo%>
+      <%= form.file_field :bus_photo %><br>
+      <% @bus.errors.full_messages_for(:bus_photo).each do |message| %>
+        <div class="error"><%= message %></div>
+      <% end %>
+    </div>
+    <div>
+      <%= form.submit %>
+   </div>
+   <% flash.each do |type, msg| %>
+      <div>
+        <%= msg %>
+      </div>
     <% end %>
-  </div>
-  <div>
-    <%= form.submit %>
- </div>
-<% end %>
+  <% end %>
+</body>
+</html>
 

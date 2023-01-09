@@ -3,6 +3,7 @@
 # This shiny device polishes bared foos
 class Bus < ApplicationRecord
   has_one_attached :bus_photo
+  validates :bus_registration_number , uniqueness:true
   validate :avatar_size_validation
   validate :image_type
   has_many :seat_numbers

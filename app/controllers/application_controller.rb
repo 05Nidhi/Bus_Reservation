@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   private
 
   def expiration
-    return redirect_to logins_new_url if params[:token].nil?
+    # return redirect_to logins_new_url if params[:token].nil?
 
     begin
       @token = params[:token]

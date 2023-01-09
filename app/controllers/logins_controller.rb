@@ -12,8 +12,9 @@ class LoginsController < ApplicationController
     @user = Registration.find_by_email(params[:email])
     if @user.password == params[:password] && @user.type == params[:type]
       @token = JwtWebToken.jwt_encode(@user.id)
-      redirect_to searches_path(token: @token)
+      redirect_to searches_path(token: @token, flag: true)
     else
+      flash.alert = "User not exist "
       render :new
     end
   end

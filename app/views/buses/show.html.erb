@@ -1,19 +1,34 @@
-<h3><%= @bus.name%></h3>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  h2 {
+    text-align: right;
+}
+</style>
+</head>
+<body>
+  <h3><%= @bus.name%></h3>
+  <h2>
+    <%= button_to 'log out' , logins_new_path(flag: false) %>
+  </h2>
 
-<%= image_tag @bus.bus_photo ,size: "150" %>
+  <%= image_tag @bus.bus_photo ,size: "150" %>
 
-<h3> From: <%= @bus.source %> </h3>
-<h3> T0: <%= @bus.destination %> </h3>
-<%= form_with do |form| %>
-  <h3>No of seats:
-  <%for i in @bus.seat_numbers %>
-  <br>
-    <div class="disabled">
-      <%= i.seat_no %>
-      <%= form.check_box disabled: true%>
-      </div>
+  <h3> From: <%= @bus.source %> </h3>
+  <h3> T0: <%= @bus.destination %> </h3>
+  <%= form_with do |form| %>
+    <h3>No of seats:</h3>
+    <%for i in @bus.seat_numbers %>
+    <br>
+
+       seat no <%= i.seat_no %>
+
+    <% end %>
   <% end %>
-<% end %>
-  </h3>
 
-<h3> Bus Registration Number <%= @bus.bus_registration_number %> </h3>
+
+  <h3> Bus Registration Number <%= @bus.bus_registration_number %> </h3>
+
+</body>
+</html>

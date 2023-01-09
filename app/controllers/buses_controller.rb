@@ -11,7 +11,6 @@ class BusesController < ApplicationController
     @source = params[:source]
     @destination = params[:destination]
     a=Bus.where(source:@source,destination:@destination)
-    binding.break
     if a.count==0
       @bus=Bus.all
     else
@@ -25,11 +24,12 @@ class BusesController < ApplicationController
 
   def create
     @bus = Bus.new(bus_params)
+
     if @bus.save
-      for i in 1..5
+      @bus.no_of_seats.times do |i|
         @bus.seat_numbers.create(seat_no:i,seat_status:false)
       end
-      redirect_to bus_path(@bus.id, token: @token)
+      redirect_to bus_path(@bus.id, token: @token , flag:true)
     else
       render :new
     end
@@ -42,6 +42,6 @@ class BusesController < ApplicationController
   private
 
   def bus_params
-    params.require(:bus).permit(:name, :source, :destination, :bus_registration_number, :bus_photo)
+    params.require(:bus).permit(:name, :source, :destination, :bus_registration_number, :bus_photo,:no_of_seats)
   end
 end
