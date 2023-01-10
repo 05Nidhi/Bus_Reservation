@@ -30,5 +30,13 @@
   <br>
   <div>
     <%= form.submit :login%>
+
+    <%= link_to 'Registration',registrations_new_path( flag:false) %>
   </div>
+
+  <% flash.each do |type ,msg| %>
+      <div class="error">
+        <%= msg %>
+      </div>
+  <% end %>
 <% end %>

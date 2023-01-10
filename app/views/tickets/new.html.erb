@@ -2,21 +2,45 @@
 <html>
 <head>
 <style>
+  table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
   h3 {
     text-align: right;
 }
 </style>
 </head>
 <body>
-
   <h3>
-    <%= button_to 'log out' , logins_new_path( flag:false) %>
+    <% @current_user.flag = false %>
+    <%= button_to 'log out' , logins_new_path(user:@current_user.save) %>
   </h3>
   <h2>Select and book your ticket of your choice </h2>
 
-
   <h2> Bus Name <%= @bus.name %></h2>
   <h2>FROM  <%= @bus.source %>    TO   <%= @bus.destination %> </h2>
+
+<%= form_tag tickets_path, method: :get do %>
+    <%= hidden_field_tag 'token', @token  %>
+    <%= hidden_field_tag 'bus_id', @bus.id  %>
+    <%= date_field_tag :ticket_date, params[:ticket_date] || Date.today, min: Date.today %>
+    <%= submit_tag 'seats'%>
+<% end %>
+
+
 
   <% @bus.seat_numbers.each do |seat| %>
     <div>
@@ -26,19 +50,21 @@
     </div>
   <% end %>
 
-  <%= form_tag tickets_create_path( flag:true,source:@bus.source,destination:@bus.destination,name:@bus.name), method: :post do %>
-    <%= hidden_field_tag 'token', @token  %>
-    <%= hidden_field_tag 'bus_id', @bus.id  %>
-    Date: <%= date_field_tag :ticket_date%>
-    Seat No: <%= text_field_tag :seat_no%>
 
-    <%= submit_tag 'Book' %>
+  <%#= form_with  url: searches_path(token:@token,source:@bus.source,destination:@bus.destination,name:@bus.name,bus_id:@bus.id) ,data: { turbo: false } do |f| %>
+
+    <%#= f.date_field :ticket_date, min: Date.today %>
+    Seat_no :<%#= f.text_field :seat_no %>
+    <%#= f.submit "book"%>
     <% flash.each do |type, msg| %>
-      <div>
+      <div class="error">
         <%= msg %>
       </div>
     <% end %>
-  <% end %>
+
+  <%# end %>
+
+
 
 </body>
 </html>

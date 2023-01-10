@@ -3,10 +3,10 @@
 # This shiny device polishes bared foos
 class RegistrationsController < ApplicationController
   skip_before_action :expiration
-  after_create :send_registration_email
+  after_action :send_registration_email, only: [:create]
 
   def send_registration_email
-    RegistrationMailer.welcome(self).deliver_now
+    RegistrationMailer.registration_email(@customer).deliver_now
   end
 
   def new
@@ -22,7 +22,7 @@ class RegistrationsController < ApplicationController
   private
 
   def customer_params
-    params.require(:customer).permit(:name, :email, :password, :type)
+    params.require(:registration).permit(:name, :email, :password, :type)
   end
 
   def permitted_params

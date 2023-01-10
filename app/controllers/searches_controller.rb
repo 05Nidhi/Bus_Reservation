@@ -1,26 +1,21 @@
 class SearchesController < ApplicationController
   def index
-    @source = params[:source]
-    @destination = params[:destination]
-    a=Bus.where(source:@source,destination:@destination)
+    a=Bus.where('lower(source) LIKE lower(?) AND lower(destination) LIKE lower(?)', "%#{params[:source]}%", "%#{params[:destination]}%")
+
     if a.count==0
-      @bus=Bus.all
+      @bus=nil
     else
       @bus=a
     end
   end
+
   def new
     @search = Ticket.new
   end
+
   def create
     @source=params[:source]
     @destination=params[:destination]
     redirect_to searches_path(token:@token,source:@source,destination: @destination,flag:true)
-
   end
-
-  private
-    def search_params
-      params.require(:bus).permit(:source,:destination)
-    end
 end

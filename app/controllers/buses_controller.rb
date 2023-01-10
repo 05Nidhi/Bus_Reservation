@@ -27,7 +27,7 @@ class BusesController < ApplicationController
 
     if @bus.save
       @bus.no_of_seats.times do |i|
-        @bus.seat_numbers.create(seat_no:i,seat_status:false)
+        @bus.seat_numbers.create(seat_no:i+1,seat_status:false)
       end
       redirect_to bus_path(@bus.id, token: @token , flag:true)
     else

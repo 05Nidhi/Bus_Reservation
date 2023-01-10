@@ -6,6 +6,7 @@ class CreateTickets < ActiveRecord::Migration[7.0]
       t.string :ticket_destination
       t.date :ticket_date
 
+
       t.timestamps
     end
   end

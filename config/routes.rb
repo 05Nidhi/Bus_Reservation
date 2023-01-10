@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   get '/searches/show' , to: 'searches#show'
   post '/searches/new' , to:'searches#new'
   post '/searches/create' , to: 'searches#create'
+  post '/logouts/new' , to: 'logouts#new'
   resources :searches
   resources :tickets
 
