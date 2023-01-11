@@ -11,11 +11,13 @@ class BusesController < ApplicationController
     @source = params[:source]
     @destination = params[:destination]
     a=Bus.where(source:@source,destination:@destination)
-    if a.count==0
-      @bus=Bus.all
-    else
-      @bus=a
-    end
+    binding.break
+    @bus=Bus.all
+    # if a.count==0
+    #   @bus=Bus.all
+    # else
+    #   @bus=a
+    # end
   end
 
   def new

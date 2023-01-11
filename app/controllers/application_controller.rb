@@ -4,12 +4,14 @@
 class ApplicationController < ActionController::Base
   include JwtWebToken
 
-  before_action :expiration
+  # before_action :expiration
+  # skip_before_action :expiration , only: :'/admin/login'
 
   private
 
   def expiration
-    # return redirect_to logins_new_url if params[:token].nil?
+    # binding.break
+    # return redirect_to admin_user_session_path if params[:token].nil?
 
     begin
       @token = params[:token]

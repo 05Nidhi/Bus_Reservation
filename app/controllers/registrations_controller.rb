@@ -14,6 +14,7 @@ class RegistrationsController < ApplicationController
   end
 
   def create
+    binding.break
     @customer = Registration.new(customer_params)
     return redirect_to('/logins/new') if @customer.save
     render :new

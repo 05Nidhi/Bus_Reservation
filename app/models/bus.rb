@@ -6,7 +6,7 @@ class Bus < ApplicationRecord
   validates :bus_registration_number , uniqueness:true
   validate :avatar_size_validation
   validate :image_type
-  has_many :seat_numbers
+  has_many :seat_numbers,dependent: :destroy
 
   private
 

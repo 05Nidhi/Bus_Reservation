@@ -24,10 +24,7 @@ h3 {
 </style>
 </head>
 <body>
-  <h3>
 
-    <%= button_to 'log out' , logouts_new_path(token: @token) %>
-  </h3>
 
 <%= form_tag searches_path(flag:true), method: :get do %>
   <%= hidden_field_tag 'token', @token  %>
@@ -92,6 +89,7 @@ h3 {
     <th>Bus photo</th>
     <th>Book ticket</th>
   </tr>
+
   <% if @bus!=nil %>
     <% @bus.each do |bus| %>
       <tr>
@@ -113,7 +111,6 @@ h3 {
           <%= image_tag bus.bus_photo , style: 'max-width: 7rem;' %>
         </td>
         <td>
-          <% @id=bus.id %>
           <%= button_to 'Book', tickets_new_path(token:@token, bus_id:bus.id) %>
         </td>
       </tr>

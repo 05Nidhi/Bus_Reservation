@@ -4,6 +4,7 @@ require 'jwt'
 
 # rubocop:enable
 module JwtWebToken
+  # binding.break
   extend ActiveSupport::Concern
   SECRET_KEY = Rails.application.secrets.secret_key_base.to_s
   def self.jwt_encode(payload, exp: (Time.now + 12.hours))

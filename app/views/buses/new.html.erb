@@ -9,9 +9,6 @@
 </head>
 <body>
 
-  <h3>
-    <%= button_to 'log out' , logouts_new_path(token: @token) %>
-  </h3>
 
   <h2>Create bus route</h2>
   <%= form_with model: @bus,url: buses_path(token: @token,flag:true), data: { turbo: false } do |form| %>
@@ -67,11 +64,7 @@
     <div>
       <%= form.submit %>
    </div>
-   <% flash.each do |type, msg| %>
-      <div>
-        <%= msg %>
-      </div>
-    <% end %>
+
   <% end %>
 </body>
 </html>

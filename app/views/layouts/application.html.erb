@@ -10,6 +10,19 @@
   </head>
 
   <body>
+
+    <div>
+      <div>
+        <h2>Bus Reservation</h2> <%= button_to 'log out' , logouts_new_path(token: @token) %>
+          <br>
+      </div>
+    </div>
+    <% flash.each do |type, msg| %>
+      <div class="error">
+        <%= msg %>
+      </div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

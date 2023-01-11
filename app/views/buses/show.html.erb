@@ -9,9 +9,7 @@
 </head>
 <body>
   <h3><%= @bus.name%></h3>
-  <h2>
-    <%= button_to 'log out' , logouts_new_path(token: @token) %>
-  </h2>
+
 
   <%= image_tag @bus.bus_photo ,size: "150" %>
 
