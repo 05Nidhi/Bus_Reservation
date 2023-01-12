@@ -20,7 +20,7 @@ class LoginsController < ApplicationController
       @user.flag = true
       @user.save
       redirect_to searches_path(token: @token)
-    elsif @user.password == nil || @user.type == nil || @user.password != params[:password] && @user.type != params[:type]
+    elsif params[:email].nil? || params[:password].nil?
       flash.alert = "User not exist "
     else
       flash.alert = "User not exist "

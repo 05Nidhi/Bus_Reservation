@@ -16,6 +16,17 @@ ActiveAdmin.register Customer do
         actions
     end
 
+    form do |f|
+      f.inputs 'Customer' do
+        f.input :name
+        f.input :email
+        f.input :password
+        f.input :type
+      end
+      f.actions
+    end
+
+
 
 
     # controller { actions :all, except: [:update] }
